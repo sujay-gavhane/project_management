@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
+  devise_for :employees
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root to: 'home#index', as: :home
+  devise_scope :employee do
+    get '/' => 'devise/sessions#new'
+    match '/users/sign_out' => 'devise/sessions#destroy', via: [:get, :delete]
+    root 'devise/sessions#new'
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
