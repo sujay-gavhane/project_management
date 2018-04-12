@@ -4,12 +4,13 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root to: 'home#index', as: :home
+  root to: 'home#index'
   devise_scope :employee do
     get '/' => 'devise/sessions#new'
     match '/users/sign_out' => 'devise/sessions#destroy', via: [:get, :delete]
-    root 'devise/sessions#new'
   end
+
+  resources :employees
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

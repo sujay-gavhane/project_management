@@ -7,17 +7,25 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-  <% if employee_signed_in? %>
-	  <strong><%= current_employee.email %></strong>.
-	  <%= link_to 'Edit profile', edit_employee_registration_path, :class => 'navbar-link' %> |
-	  <%= link_to "Logout", destroy_employee_session_path, method: :delete, :class => 'navbar-link'  %>
-	<% else %>
-	  <%= link_to "Sign up", new_employee_registration_path, :class => 'navbar-link'  %> |
-	  <%= link_to "Login", new_employee_session_path, :class => 'navbar-link'  %>
-	<% end %>
-<%= yield %>
-
+  <div class="container">
+    <div class="row">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <% if employee_signed_in? %>
+        <div class="pull-right">
+          <strong><%= current_employee.email %></strong>.
+          <%= link_to 'Edit profile', edit_employee_registration_path, :class => 'navbar-link' %> |
+          <%= link_to "Logout", destroy_employee_session_path, method: :delete, :class => 'navbar-link'  %>
+        </div>
+        <div class="row">
+          <%= link_to 'Employess', employees_path %>
+        </div>
+      <% else %>
+        <%= link_to "Sign up", new_employee_registration_path, :class => 'navbar-link'  %> |
+        <%= link_to "Login", new_employee_session_path, :class => 'navbar-link'  %>
+      <% end %>
+      <%= yield %>
+    </div>
+  </div>
 </body>
 </html>
