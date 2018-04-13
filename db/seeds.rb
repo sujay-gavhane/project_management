@@ -10,6 +10,10 @@ Employee.create(
   password_confirmation: 'test1234', first_name: "testfirstname",
   last_name: "testlastname"
 )
+
+['manager', 'developer'].each do |role|
+  Role.find_or_create_by(name: role)
+end
 employee = Employee.find_by(email: 'test@projectmanagement.com')
 employee.remove_role :developer
 employee.add_role :manager

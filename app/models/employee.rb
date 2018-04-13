@@ -11,8 +11,10 @@ class Employee < ActiveRecord::Base
   after_create :assign_default_role
 
   def assign_default_role
-    self.add_role(:developer) if self.roles.blank?
-    manager = Employee.joins(:roles).where('roles.name = ?', 'manager')
-    self.update_attributes(manager_id: manager.first.id)
+    unless self.email == 'test@projectmanagement.com'
+      self.add_role(:developer) if self.roles.blank?
+      manager = Employee.joins(:roles).where('roles.name = ?', 'manager')
+      self.update_attributes(manager_id: manager.first.id)
+    end
   end
 end
