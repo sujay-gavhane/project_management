@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-md-12" id="tab_2">
+    <div class="portlet box green">
+      <div class="portlet-title">
+        <div class="caption">
+          <i class="fa fa-pencil badge-warning"></i>Change Role
+        </div>
+        <div class="tools">
+          <a href="javascript:;" class="collapse"></a>
+        </div>
+      </div>
+      <div class="portlet-body form">
+        <%= form_tag(employee_path(@employee), method: 'PATCH') do |f| %>
+          <div class=form-body>
+            <div class='row'>
+              <div class='col-md-6'>
+                <label class="control-label">Role</label>
+                <%= select_tag :role, options_for_select(['manager', 'developer']), {:prompt => "Select Question Type", :class => "form-control"} %>
+              </div>
+            </div>
+          </div>
+          <div class='form-actions fluid'>
+            <div class="row">
+              <dir class="col-md-6">
+                <%= submit_tag 'Update', class: 'btn btn-primary pull-right' %>
+              </dir>
+            </div>
+          </div>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>
