@@ -5,9 +5,9 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_employee!
 
 
-  rescue_from CanCan::AccessDenied, with: :permission_denied
-  rescue_from ActiveRecord::RecordNotFound, with: :routing_error
-  rescue_from ActionView::Template::Error, with: :routing_error
+  rescue_from CanCan::AccessDenied, with: :permission_denied unless ["development"].include?(Rails.env)
+  rescue_from ActiveRecord::RecordNotFound, with: :routing_error unless ["development"].include?(Rails.env)
+  rescue_from ActionView::Template::Error, with: :routing_error unless ["development"].include?(Rails.env)
 
   def current_ability
     @current_ability ||= Ability.new(current_employee)
