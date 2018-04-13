@@ -25,6 +25,7 @@
                 </label>
                 <%= f.text_area :description, size: '5 x 5' , class: 'form-control' %>
               </div>
+              <%= f.hidden_field :manager_id, value: current_employee.id %>
             </div>
           </div>
           <div class='form-actions fluid'>

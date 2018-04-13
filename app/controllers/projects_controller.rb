@@ -17,7 +17,7 @@ class ProjectsController < ApplicationController
   end
 
   def index
-    @projects = Project.all.order('created_at desc')
+    @projects = Project.where(manager_id: current_employee.id).order('created_at desc')
   end
 
   def edit
@@ -42,6 +42,6 @@ class ProjectsController < ApplicationController
   end
 
   def projects_params
-    params.require(:project).permit(:title, :description)
+    params.require(:project).permit(:title, :description, :manager_id)
   end
 end
