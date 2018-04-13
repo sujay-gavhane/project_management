@@ -1,4 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
+  before_action :authenticate_employee!
 
   def update
     self.resource.update_attributes(registrations_params)

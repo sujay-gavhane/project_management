@@ -18,12 +18,14 @@
         <p class="notice "><%= notice %></p>
         <p class="alert"><%= alert %></p>
         <div class="row">
-          <div class="col-md-1">
-            <%= link_to 'Employess', employees_path %>
-          </div>
-          <div class="col-md-1">
-            <%= link_to 'Projects', projects_path %>
-          </div>
+          <% if can? :manage, :all %>
+            <div class="col-md-1">
+              <%= link_to 'Employess', employees_path %>
+            </div>
+            <div class="col-md-1">
+              <%= link_to 'Projects', projects_path %>
+            </div>
+          <% end %>
         </div>
       <% else %>
         <%= link_to "Sign up", new_employee_registration_path, :class => 'navbar-link'  %> |
