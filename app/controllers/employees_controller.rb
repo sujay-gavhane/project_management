@@ -11,9 +11,9 @@ class EmployeesController < ApplicationController
 
   def update
     role = @employee.roles.first.name
-    if role == 'developer'
-      @employee.remove_role :developer
-      @employee.add_role :manager
+    if @employee.present?
+      @employee.roles.destroy_all
+      @employee.add_role params[:role].to_sym
       redirect_to employees_path, notice: 'Role updated successfully.'
     else
       redirect_to edit_employee_path(@employee), alert: 'Error while updating role.'
