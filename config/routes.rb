@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     collection do
       patch :assign_project
     end
+    resources :features
   end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

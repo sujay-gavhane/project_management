@@ -34,6 +34,7 @@ class Ability
     else
       cannot :manage, Project
       cannot :manage, Employee
+      cannot :manage, Feature
     end
   end
 end
