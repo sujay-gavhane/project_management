@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_employee!
   before_action :authorize_employee
-  before_action :find_project, only: [:edit, :update, :destroy]
+  before_action :find_project, only: [:edit, :update, :destroy, :assign_project, :show]
 
   def new
     @project = Project.new
@@ -29,6 +29,19 @@ class ProjectsController < ApplicationController
     else
       redirect_to edit_project_path(@project), alert: @project.errors.full_messages.join('<br>')
     end
+  end
+
+  def show
+    @employees = Employee.joins(:roles).where('roles.name = ?', 'developer')
+  end
+
+  def assign_project
+    Assignee.transaction do
+      params[:developers].each do |developer|
+        Assignee.find_or_create_by(employee_id: developer, project_id: @project.id)
+      end
+    end
+    redirect_to projects_path, notice: 'Assigned Successfully'
   end
 
   private

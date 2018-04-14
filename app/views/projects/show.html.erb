@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-md-12" id="tab_2">
+    <div class="portlet box green">
+      <div class="portlet-body form">
+        <%= form_tag(assign_project_projects_path, method: 'PATCH', html: {class: "form-horizontal"}) do %>
+          <div class=form-body>
+            <div class='row'>
+              <div class='col-md-6'>
+                <label class="control-label">Users
+                  <span class="required" aria-required="true">* </span>
+                </label>
+                <%= select_tag :developers, options_from_collection_for_select(@employees, 'id', 'email'), multiple: true, class: 'form-control' %>
+	              <%= hidden_field_tag :id, params[:id] %>
+              </div>
+            </div>
+          </div>
+          <div class='form-actions fluid'>
+          	<div class="row">
+          		<div class="col-md-6">
+	            	<%= submit_tag 'Assign', class: 'btn primary pull-right margin-top-15' %>
+		          </div>
+          	</div>
+          </div>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>

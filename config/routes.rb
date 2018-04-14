@@ -11,8 +11,11 @@ Rails.application.routes.draw do
   end
 
   resources :employees
-  resources :projects
-
+  resources :projects do
+    collection do
+      patch :assign_project
+    end
+  end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
