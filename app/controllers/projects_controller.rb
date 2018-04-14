@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_employee!
   before_action :authorize_employee
-  before_action :find_project, only: [:edit, :update, :destroy, :assign_project, :show]
+  before_action :find_project, only: [:edit, :update, :assign_project, :show]
 
   def new
     @project = Project.new
