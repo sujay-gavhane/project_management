@@ -7,6 +7,9 @@ class Employee < ActiveRecord::Base
 
   has_many :developers, class_name: 'Employee', foreign_key: 'manager_id'
   belongs_to :manager, class_name: 'Employee'
+  has_many :managing_projects, class_name: 'Project', foreign_key: 'manager_id'
+  has_many :projects, through: :assignees
+  has_many :assignees
 
   after_create :assign_default_role
 
