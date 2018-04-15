@@ -1,0 +1,13 @@
+<% if @message[:notice].present? %>
+	$('#feature-messages').removeClass('alert-danger hidden')
+	$('#feature-messages').addClass('alert-success')
+	$('#response-message').html('<%= @message[:notice] %>')
+	feature = $('.feature_<%= @message[:feature] %>').html()
+	$('.feature_<%= @message[:feature] %>').addClass('remove_element')
+	$('.feature_<%= @message[:feature] %>').parent('td').next('td').append('<div class="feature_<%= @message[:feature] %>">'+ feature +'</div>')
+	$('.remove_element').remove()
+<% else %>
+	$('#feature-messages').removeClass('alert-success hidden')
+	$('#feature-messages').addClass('alert-danger')
+	$('#response-message').html('<%= @message[:alert] %>')
+<% end %>
