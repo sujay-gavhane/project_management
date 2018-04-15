@@ -17,6 +17,10 @@ Rails.application.routes.draw do
     end
     resources :features
   end
+
+  get '/todo_list' => 'features#todo_list'
+  get '/move_forword/:id' => 'features#move_forword', as: :move_forword
+  get '/move_back/:id' => 'features#move_back', as: :move_back
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

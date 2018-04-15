@@ -1,8 +1,8 @@
 class FeaturesController < ApplicationController
   before_action :authenticate_employee!
-  before_action :authorize_employee
-  before_action :find_feature, only: [:edit, :update]
-  before_action :find_project
+  before_action :authorize_employee, except: [:todo_list, :move_back, :move_forword]
+  before_action :find_feature, only: [:edit, :update, :move_forword, :move_back]
+  before_action :find_project, except: [:todo_list, :move_back, :move_forword]
 
   def new
     @feature = Feature.new
@@ -29,6 +29,39 @@ class FeaturesController < ApplicationController
       redirect_to project_features_path, notice: 'Feature Updated Successfully'
     else
       redirect_to edit_project_feature_path(@project, @feature), alert: @feature.errors.full_messages.join('<br>')
+    end
+  end
+
+  def todo_list
+    authorize! :view, :todo_list
+    @projects = current_employee.projects
+  end
+
+  def move_forword
+    authorize! :write, :move_forword
+    case @feature.status
+    when 'todo'
+      @feature.update_attributes(status: 'inprogress')
+      @message = { notice: "#{@feature.title} moved to In Progress", feature: @feature.id}
+    when 'inprogress'
+      @feature.update_attributes(status: 'done')
+      @message = { notice: "#{@feature.title} moved to Done", feature: @feature.id}
+    else
+      @message = { alert: "#{@feature.title} can not be move forword."}
+    end
+  end
+
+  def move_back
+    authorize! :write, :move_back
+    case @feature.status
+    when 'done'
+      @feature.update_attributes(status: 'inprogress')
+      @message = { notice: "#{@feature.title} moved to In Progress", feature: @feature.id}
+    when 'inprogress'
+      @feature.update_attributes(status: 'todo')
+      @message = { notice: "#{@feature.title} moved to ToDo", feature: @feature.id}
+    else
+      @message = { alert: "#{@feature.title} can not be move backword."}
     end
   end
 

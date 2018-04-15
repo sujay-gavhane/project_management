@@ -31,10 +31,14 @@ class Ability
 
     if employee.has_role? :manager
       can :manage, :all
+      cannot :view, :todo_list
     else
       cannot :manage, Project
       cannot :manage, Employee
       cannot :manage, Feature
+      can :view, :todo_list
+      can :write, :move_forword
+      can :write, :move_back
     end
   end
 end

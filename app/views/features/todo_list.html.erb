@@ -1,0 +1,58 @@
+<div class="alert alert-success alert-danger alert-dismissable hidden" id="feature-messages">
+  <span id="response-message"></span>
+</div>
+<div class="row">
+  <div class="">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>
+            Project Name
+          </th>
+          <th>
+            Todo
+          </th>
+          <th>
+            In Progress
+          </th>
+          <th>
+            Done
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @projects.each do |project| %>
+          <% todo_features =  Feature.by_status_project_developer(project.id, current_employee.id, 'todo') %>
+          <% inprogress_features =  Feature.by_status_project_developer(project.id, current_employee.id, 'inprogress') %>
+          <% done_features =  Feature.by_status_project_developer(project.id, current_employee.id, 'done') %>
+          <tr>
+            <td>
+              <%= project.title %>
+            </td>
+            <td>
+              <% todo_features.each do |todo| %>
+                <dir class="feature_<%= todo.id %>">
+                  <%= link_to_if true, 'Backword', move_back_path(todo.id), remote: true %> <%= todo.title %> <%= link_to_if true, 'Forword', move_forword_path(todo.id), remote: true %>
+                </dir>
+              <% end %>
+            </td>
+            <td>
+              <% inprogress_features.each do |todo| %>
+                <dir class="feature_<%= todo.id %>">
+                  <%= link_to_if true, 'Backword', move_back_path(todo.id), remote: true %> <%= todo.title %> <%= link_to_if true, 'Forword', move_forword_path(todo.id), remote: true %>
+                </dir>
+              <% end %>
+            </td>
+            <td>
+              <% done_features.each do |todo| %>
+                <dir class="feature_<%= todo.id %>">
+                  <%= link_to_if true, 'Backword', move_back_path(todo.id), remote: true %> <%= todo.title %> <%= link_to_if true, 'Forword', move_forword_path(todo.id), remote: true %>
+                </dir>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
