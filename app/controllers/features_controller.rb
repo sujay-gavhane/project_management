@@ -1,6 +1,6 @@
 class FeaturesController < ApplicationController
   before_action :authenticate_employee!
-  before_action :authorize_employee, except: [:todo_list, :move_back, :move_forword, :manager_features_view]
+  before_action :authorize_employee, except: [:todo_list, :move_back, :move_forword]
   before_action :find_feature, only: [:edit, :update, :move_forword, :move_back]
   before_action :find_project, except: [:todo_list, :move_back, :move_forword, :manager_features_view]
 

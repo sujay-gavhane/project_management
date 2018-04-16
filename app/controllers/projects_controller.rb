@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_employee!
   before_action :authorize_employee
-  before_action :find_project, only: [:edit, :update, :assign_project, :show]
+  before_action :find_project, only: [:edit, :update, :assign_project, :show, :pie_chart]
 
   def new
     @project = Project.new
@@ -46,6 +46,13 @@ class ProjectsController < ApplicationController
     else
       redirect_to project_path(@project.id), alert: "Please select atleast on developer"
     end
+  end
+
+  def pie_chart
+    features = @project.features
+    @todo = features.by_status(@project.id, 'todo').count
+    @inprogress = features.by_status(@project.id, 'inprogress').count
+    @done = features.by_status(@project.id, 'done').count
   end
 
   private

@@ -36,6 +36,8 @@ class Ability
       cannot :manage, Project
       cannot :manage, Employee
       cannot :manage, Feature
+      cannot :view, :pie_chart
+      cannot :view, :manager_features_view
       can :view, :todo_list
       can :write, :move_forword
       can :write, :move_back
