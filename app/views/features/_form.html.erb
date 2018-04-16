@@ -27,7 +27,7 @@
               <div class='col-md-6'>
                 <label class="control-label">Developer
                 </label>
-                <%= f.select :developer_id, options_for_select(@project.employees.collect {|p| [ p.email, p.id ] }), {:prompt => "Select Developer", :class => "form-control"} %>
+                <%= f.select :developer_id, options_for_select(@project.employees.collect {|p| [ p.email, p.id ] }), {:prompt => "Select Developer", :class => "form-control", :selected => @feature.developer} %>
               </div>
               <%= f.hidden_field :project_id, value: params[:project_id] %>
             </div>
