@@ -15,6 +15,9 @@ Rails.application.routes.draw do
     collection do
       patch :assign_project
     end
+    member do
+      get :pie_chart
+    end
     resources :features
   end
 
