@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :features
   end
 
+  get '/manager_features_view' => 'features#manager_features_view'
   get '/todo_list' => 'features#todo_list'
   get '/move_forword/:id' => 'features#move_forword', as: :move_forword
   get '/move_back/:id' => 'features#move_back', as: :move_back

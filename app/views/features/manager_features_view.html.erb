@@ -1,0 +1,56 @@
+<div class="alert alert-success alert-danger alert-dismissable hidden" id="feature-messages">
+  <span id="response-message"></span>
+</div>
+<div class="row">
+  <div class="">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>
+            Status
+          </th>
+          <% @projects.each do |project| %>
+            <th>
+              <%= project.title %>
+            </th>
+          <% end %>  
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>ToDo</td>
+          <% @projects.each do |project| %>
+            <% todo_features =  Feature.status_by_project_manager(project.id, 'todo') %>
+            <td>
+              <% todo_features.each do |todo| %>
+                <%= todo.title %> ( <%= todo.developer.email %> )
+              <% end %>          
+            </td>         
+          <% end %>
+        </tr>
+        <tr>
+          <td>In Progress</td>
+          <% @projects.each do |project| %>
+            <% inprogress_features =  Feature.status_by_project_manager(project.id, 'inprogress') %>
+            <td>
+              <% inprogress_features.each do |inprogress| %>
+                <%= inprogress.title %> ( <%= inprogress.developer.email %> )
+              <% end %>          
+            </td>
+          <% end %>
+        </tr>
+        <tr>
+          <td>Done</td>
+          <% @projects.each do |project| %>
+            <% done_features =  Feature.status_by_project_manager(project.id, 'done') %>
+            <td>
+              <% done_features.each do |done| %>
+                <%= done.title %> ( <%= done.developer.email %> )
+              <% end %>          
+            </td>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

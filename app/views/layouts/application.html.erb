@@ -23,8 +23,11 @@
             <div class="col-md-1">
               <%= link_to 'Projects', projects_path %>
             </div>
+            <dir  class="col-md-1 margin-0">
+              <%= link_to 'ToDo List', manager_features_view_path %>
+            </dir>
           <% elsif can? :view, :todo_list %>
-            <div class="col-md-1">
+            <div class="col-md-1">      
               <%= link_to 'ToDo List', todo_list_path %>
             </div>
           <% end %>
