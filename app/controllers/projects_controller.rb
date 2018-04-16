@@ -36,12 +36,16 @@ class ProjectsController < ApplicationController
   end
 
   def assign_project
-    Assignee.transaction do
-      params[:developers].each do |developer|
-        Assignee.find_or_create_by(employee_id: developer, project_id: @project.id)
+    if params[:developers].present? 
+      Assignee.transaction do
+        params[:developers].each do |developer|
+          Assignee.find_or_create_by(employee_id: developer, project_id: @project.id)
+        end
       end
+      redirect_to projects_path, notice: 'Assigned Successfully'
+    else
+      redirect_to project_path(@project.id), alert: "Please select atleast on developer"
     end
-    redirect_to projects_path, notice: 'Assigned Successfully'
   end
 
   private

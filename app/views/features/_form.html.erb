@@ -25,7 +25,7 @@
                 <%= f.text_area :description, size: '5 x 5' , class: 'form-control' %>
               </div>
               <div class='col-md-6'>
-                <label class="control-label">Description
+                <label class="control-label">Developer
                 </label>
                 <%= f.select :developer_id, options_for_select(@project.employees.collect {|p| [ p.email, p.id ] }), {:prompt => "Select Developer", :class => "form-control"} %>
               </div>
